@@ -1,11 +1,11 @@
 Summary:	Keep passwords and other user's secrets
 Name:		gnome-keyring
-Version:	3.8.0
+Version:	3.8.2
 Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-keyring/3.8/%{name}-%{version}.tar.xz
-# Source0-md5:	59758cf9983229b07ffa17da1214d281
+# Source0-md5:	7ba61e86f447584d2408bb95c34bbdb6
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
