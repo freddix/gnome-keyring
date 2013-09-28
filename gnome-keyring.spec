@@ -1,24 +1,24 @@
 Summary:	Keep passwords and other user's secrets
 Name:		gnome-keyring
-Version:	3.8.2
+Version:	3.10.0
 Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-keyring/3.8/%{name}-%{version}.tar.xz
-# Source0-md5:	7ba61e86f447584d2408bb95c34bbdb6
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-keyring/3.10/%{name}-%{version}.tar.xz
+# Source0-md5:	6ec773dbf3bd2d5e666ddbf3103aa0d9
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dbus-devel
-BuildRequires:	gcr-devel
-BuildRequires:	gobject-introspection-devel
-BuildRequires:	gtk+3-devel
+BuildRequires:	gcr-devel >= 3.10.0
+BuildRequires:	gobject-introspection-devel >= 1.38.0
+BuildRequires:	gtk+3-devel >= 3.10.0
 BuildRequires:	libcap-ng-devel
 BuildRequires:	libtool
 BuildRequires:	p11-kit-devel
 BuildRequires:	pkg-config
 Requires(post,postun):	glib-gio-gsettings
-Requires:	gcr
+Requires:	gcr >= 3.10.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_libexecdir	%{_libdir}/%{name}
@@ -101,5 +101,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/xdg/autostart/gnome-keyring-pkcs11.desktop
 %{_sysconfdir}/xdg/autostart/gnome-keyring-secrets.desktop
 %{_sysconfdir}/xdg/autostart/gnome-keyring-ssh.desktop
-%{_sysconfdir}/pkcs11/modules/gnome-keyring.module
+%{_datadir}/p11-kit/modules/gnome-keyring.module
 
