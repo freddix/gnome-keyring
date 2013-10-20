@@ -1,11 +1,11 @@
 Summary:	Keep passwords and other user's secrets
 Name:		gnome-keyring
-Version:	3.10.0
+Version:	3.10.1
 Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-keyring/3.10/%{name}-%{version}.tar.xz
-# Source0-md5:	6ec773dbf3bd2d5e666ddbf3103aa0d9
+# Source0-md5:	a0fedbeb11a654975abed45865d3f82d
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -34,11 +34,9 @@ the GNOME keyring system.
 %prep
 %setup -q
 
-sed -i "s|LXDE|OPENBOX|g" daemon/*.desktop.in.in
+%{__sed} -i "s|LXDE|OPENBOX|g" daemon/*.desktop.in.in
 
 %build
-rm -f daemon/*.desktop.in
-%{__gtkdocize}
 %{__intltoolize}
 %{__libtoolize}
 %{__aclocal}
@@ -49,7 +47,6 @@ rm -f daemon/*.desktop.in
 	--disable-schemas-compile		\
 	--disable-silent-rules			\
 	--disable-static			\
-	--with-html-dir=%{_gtkdocdir}		\
 	--with-ca-certificates=%{_sysconfdir}/certs/ca-certificates.crt	\
 	--with-root-certs=/etc/certs
 %{__make}
@@ -60,10 +57,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install install-pam	\
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT/%{_lib}/security/*.la
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/*.la
-rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-keyring/*/*.la
-rm -r $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,en@shaw}
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,en@shaw}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/{*,*/*}/*.la
 
 %find_lang %{name}
 
@@ -102,4 +97,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/xdg/autostart/gnome-keyring-secrets.desktop
 %{_sysconfdir}/xdg/autostart/gnome-keyring-ssh.desktop
 %{_datadir}/p11-kit/modules/gnome-keyring.module
+
+%{_mandir}/man1/gnome-keyring-daemon.1*
 
