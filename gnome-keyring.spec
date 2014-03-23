@@ -1,16 +1,16 @@
 Summary:	Keep passwords and other user's secrets
 Name:		gnome-keyring
-Version:	3.10.1
-Release:	2
+Version:	3.12.0
+Release:	1
 License:	LGPL v2+/GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-keyring/3.10/%{name}-%{version}.tar.xz
-# Source0-md5:	a0fedbeb11a654975abed45865d3f82d
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-keyring/3.12/%{name}-%{version}.tar.xz
+# Source0-md5:	b0e2041c31c68b92f324d1ec7fa9d289
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dbus-devel
-BuildRequires:	gcr-devel >= 3.10.0
+BuildRequires:	gcr-devel >= 3.12.0
 BuildRequires:	gobject-introspection-devel >= 1.38.0
 BuildRequires:	gtk+3-devel >= 3.10.0
 BuildRequires:	libcap-ng-devel
@@ -18,7 +18,7 @@ BuildRequires:	libtool
 BuildRequires:	p11-kit-devel
 BuildRequires:	pkg-config
 Requires(post,postun):	glib-gio-gsettings
-Requires:	gcr >= 3.10.0
+Requires:	gcr >= 3.12.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_libexecdir	%{_libdir}/%{name}
@@ -34,6 +34,7 @@ the GNOME keyring system.
 %prep
 %setup -q
 
+# freddix only
 %{__sed} -i "s|LXDE|OPENBOX|g" daemon/*.desktop.in.in
 
 %build
@@ -44,11 +45,9 @@ the GNOME keyring system.
 %{__autoheader}
 %{__automake}
 %configure \
-	--disable-schemas-compile		\
-	--disable-silent-rules			\
-	--disable-static			\
-	--with-ca-certificates=%{_sysconfdir}/certs/ca-certificates.crt	\
-	--with-root-certs=/etc/certs
+	--disable-schemas-compile	\
+	--disable-silent-rules		\
+	--disable-static
 %{__make}
 
 %install
@@ -98,5 +97,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/xdg/autostart/gnome-keyring-ssh.desktop
 %{_datadir}/p11-kit/modules/gnome-keyring.module
 
-%{_mandir}/man1/gnome-keyring-daemon.1*
+#%{_mandir}/man1/gnome-keyring-daemon.1*
 
