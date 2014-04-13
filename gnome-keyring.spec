@@ -45,15 +45,14 @@ the GNOME keyring system.
 %{__autoheader}
 %{__automake}
 %configure \
-	--disable-schemas-compile	\
-	--disable-silent-rules		\
-	--disable-static
+	--disable-schemas-compile   \
+	--disable-silent-rules
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install install-pam	\
+%{__make} install   \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/{ca@valencia,en@shaw}
